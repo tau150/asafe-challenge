@@ -2,15 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #FFFFFF;
+    --foreground: #0F1729;
+    --card: #FFFFFF;
+    --card-foreground: #0F1729;
+    --popover: #FFFFFF;
+    --popover-foreground: #0F1729;
+    --primary: #3B82F6;
+    --primary-foreground: #F8FAFC;
+    --secondary: #F1F5F9;
+    --secondary-foreground: #1E293B;
+    --muted: #F1F5F9;
+    --muted-foreground: #64748B;
+    --accent: #F1F5F9;
+    --accent-foreground: #1E293B;
+    --destructive: #EF4444;
+    --destructive-foreground: #F8FAFC;
+    --border: #E2E8F0;
+    --input: #E2E8F0;
+    --ring: #3B82F6;
+    --radius: 0.5rem;
+  }
+
+  .vibrant {
+    --background: #F9E6FF;
+    --foreground: #2B0040;
+    --card: #FDF2FF;
+    --card-foreground: #2B0040;
+    --popover: #FDF2FF;
+    --popover-foreground: #2B0040;
+    --primary: #8000FF;
+    --primary-foreground: #FDF2FF;
+    --secondary: #00D1FF;
+    --secondary-foreground: #003340;
+    --muted: #F0D1FF;
+    --muted-foreground: #8000BF;
+    --accent: #80FF80;
+    --accent-foreground: #004000;
+    --destructive: #FF0000;
+    --destructive-foreground: #FDF2FF;
+    --border: #E6B3FF;
+    --input: #E6B3FF;
+    --ring: #8000FF;
   }
 }
 
