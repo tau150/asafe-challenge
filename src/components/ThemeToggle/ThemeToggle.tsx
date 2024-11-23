@@ -8,13 +8,15 @@ export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
   return (
-    <button onClick={() => setTheme(theme === "vibrant" ? "corporate" : "vibrant")}>
-      {theme === "vibrant" ? (
-        <Palette className="h-[1.2rem] w-[1.2rem]" />
-      ) : (
-        <Briefcase className="h-[1.2rem] w-[1.2rem]" />
-      )}
-      <span className="sr-only">Toggle theme</span>
-    </button>
+    <div>
+      <button onClick={() => setTheme(theme === "vibrant" ? "corporate" : "vibrant")}>
+        {theme === "vibrant" ? (
+          <Palette className="h-[1.2rem] w-[1.2rem] text-ring" />
+        ) : (
+          <Briefcase className="h-[1.2rem] w-[1.2rem] text-ring" />
+        )}
+        <span className="sr-only">Toggle theme</span>
+      </button>
+    </div>
   );
 }
