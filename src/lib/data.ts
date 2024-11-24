@@ -1,14 +1,15 @@
 import { createClient } from "@/utils/supabase/server";
-import { type Sale, type TopSellingProduct } from "./domain";
+import { type Sale, type TopSalesProduct, type Product } from "./domain";
 
 const supabase = createClient();
+const STOCK_LIMIT = 10;
 
-export async function getTopSellingProducts(): Promise<TopSellingProduct[]> {
-  try {
+export async function getTopSalesProducts(): Promise<TopSalesProduct[]> {
+
     const { data, error } = await supabase.from("sales").select(`
-        product_id,
-        quantity,
-        product:products!inner ( name )
+      product_id,
+      quantity,
+      product:products!inner ( name )
       `);
 
     if (error) {
@@ -18,6 +19,9 @@ export async function getTopSellingProducts(): Promise<TopSellingProduct[]> {
     if (!data) {
       throw new Error("No data returned from Supabase.");
     }
+
+    // delay to represent streaming loading
+    await new Promise(resolve => setTimeout(resolve, 2000))
 
     type SaleWithProduct = Sale & { product: { name: string } };
 
@@ -31,14 +35,23 @@ export async function getTopSellingProducts(): Promise<TopSellingProduct[]> {
       return acc;
     }, {});
 
-    const topSellingProducts: TopSellingProduct[] = Object.entries(aggregatedData)
+    const topSalesProducts: TopSalesProduct[] = Object.entries(aggregatedData)
       .map(([name, totalSold]) => ({ name, totalSold }))
       .sort((a, b) => b.totalSold - a.totalSold);
 
-    return topSellingProducts;
-  } catch (err) {
-    console.error("Error fetching top-selling products:", err);
+    return topSalesProducts;
+}
 
-    return [];
+export async function getLowStockProducts(): Promise<Product[]> {
+  const { data, error } = await supabase.from("products").select("*").lte("stock", STOCK_LIMIT);
+
+
+  // delay to represent streaming loading
+  await new Promise(resolve => setTimeout(resolve, 3000))
+
+  if (error) {
+     throw new Error(error.message);
   }
+
+  return data || [];
 }

@@ -1,4 +1,4 @@
-export interface TopSellingProduct {
+export interface TopSalesProduct {
   name: string;
   totalSold: number;
 }

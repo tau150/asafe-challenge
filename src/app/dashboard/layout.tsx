@@ -15,12 +15,18 @@ export default function DashboardLayout({
   const pathName = usePathname();
 
   return (
-    <main className="flex h-screen ">
-      <aside className="p-2 border-l-2 border-2 w-1/12 bg-white">
-        <Image alt="logo" height={100} src="/asafe-logo.webp" width={100} />
-        <section className="mt-4 flex flex-col gap-4">
+    <main className="flex">
+      <aside className="flex flex-col p-2 border-l-2 border-2 lg:w-1/12 bg-white lg:min-h-screen">
+        <div className="hidden lg:block" >
+          <Image alt="logo" height={100} src="/asafe-logo.webp" width={100} />
+        </div>
+        <section className="mt-4 flex flex-col flex-grow gap-4">
           <Link href={Routes.DASHBOARD}>
+            <div className={`lg:hidden p-2 rounded-md ${pathName === Routes.DASHBOARD ? "bg-accent-foreground text-accent" : ""} `}>
+              <ChartArea className="w-3 h-3 " />
+            </div>
             <MenuItem
+              className="hidden lg:flex"
               icon={<ChartArea className="w-4 h-4" />}
               isActive={pathName === Routes.DASHBOARD}
             >
@@ -28,19 +34,27 @@ export default function DashboardLayout({
             </MenuItem>
           </Link>
           <Link href={Routes.SALES}>
-            <MenuItem
-              icon={<TableProperties className="w-4 h-4" />}
-              isActive={pathName === Routes.SALES}
-            >
-              Sales
-            </MenuItem>
+          <div className={`lg:hidden p-2 rounded-md ${pathName === Routes.SALES ? "bg-accent-foreground text-accent" : ""} `}>
+            <TableProperties className="w-3 h-3" />
+          </div>
+          <MenuItem
+            className="hidden lg:flex"
+            icon={<TableProperties className="w-4 h-4" />}
+            isActive={pathName === Routes.SALES}
+          >
+            Sales
+          </MenuItem>
           </Link>
-          <MenuItem className="mt-10" icon={<LogOut className="w-4 h-4" />}>
+          <div className="lg:hidden flex justify-center mt-8">
+            <LogOut className="w-3 h-3" />
+          </div>
+          <hr />
+          <MenuItem className="hidden lg:mt-6 lg:flex" icon={<LogOut className="w-4 h-4" />}>
             Log out
           </MenuItem>
         </section>
       </aside>
-      <section>{children}</section>
+      <section className="flex-grow">{children}</section>
     </main>
   );
 }
