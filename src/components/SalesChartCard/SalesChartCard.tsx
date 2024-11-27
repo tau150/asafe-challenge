@@ -1,14 +1,15 @@
 import { SalesChart } from "../SalesChart";
-import { getTopSalesProducts } from "@/lib/data";
+import { API } from "@/services/dashboardApi"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
 import { Skeleton } from "@/components/ui";
 import { Error } from "@/components/ui";
 
 export async function SalesChartCard() {
   try {
-    const topSalesProducts = await getTopSalesProducts();
+    const topSalesProducts = await API.getTopSales();
+
     const graphProps = topSalesProducts.reduce(
-      (acc: { labels: string[]; values: number[] }, current) => {
+      (acc: { labels: string[]; values: number[] }, current: { name: string; totalSold: number; }) => {
         return {
           ...acc,
           labels: [...acc.labels, current.name],

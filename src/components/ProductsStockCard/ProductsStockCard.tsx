@@ -1,5 +1,5 @@
-import {  getLowStockProducts } from "@/lib/data";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
+import { API } from "@/services/dashboardApi"
+import { Card,  CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
 import { Skeleton } from "@/components/ui";
 import { Title } from "@/components/ui";
 import { Error } from "@/components/ui";
@@ -7,43 +7,42 @@ import { Error } from "@/components/ui";
 
 export async function ProductsStockCard() {
   try {
-  const lowStockProducts = await getLowStockProducts();
+  const lowStockProducts = await API.getLowStockProducts();
   const lowStockProductsName = lowStockProducts.map(product => product.name)
 
   return (
     <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
-    <CardHeader className="bg-white rounded-t-md">
-      <CardTitle>Products with low stock</CardTitle>
-      <CardDescription>We will run out of stock soon</CardDescription>
-    </CardHeader>
-    <CardContent className="flex flex-col flex-grow overflow-y-auto bg-white rounded-b-md">
-      <Title alignment="center" as="h3" color="primary" className="mt-4" size='large'>
-        {lowStockProductsName.length}
-      </Title>
-      <div className="mt-12 lg:mt-auto">
-         {lowStockProductsName.map(name => <p key={name} className="truncate text-neutral-500"> - {name}</p>)}
-      </div>
-    </CardContent>
-  </Card>
+      <CardHeader className="bg-white rounded-t-md">
+        <CardTitle>Products with low stock</CardTitle>
+        <CardDescription>We will run out of stock soon</CardDescription>
+      </CardHeader>
+      <CardContent className="flex flex-col flex-grow overflow-y-auto bg-white rounded-b-md">
+        <Title alignment="center" as="h3" color="primary" className="mt-4" size='large'>
+          {lowStockProductsName.length}
+        </Title>
+        <div className="mt-12 lg:mt-auto">
+          {lowStockProductsName.map(name => <p key={name} className="truncate text-neutral-500"> - {name}</p>)}
+        </div>
+      </CardContent>
+    </Card>
   );
-}catch(e){
-  return (
-    <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
-    <CardHeader className="bg-white rounded-t-md">
-      <CardTitle>Products with low stock</CardTitle>
-      <CardDescription>We will run out of stock soon</CardDescription>
-    </CardHeader>
-    <CardContent className="bg-white rounded-b-md">
-    <Error
-      className="h-full"
-      variant="error"
-      description="There was a problem getting stocks data."
-    />
-    </CardContent>
-  </Card>
-  )
-}
-
+} catch(e){
+    return (
+      <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
+      <CardHeader className="bg-white rounded-t-md">
+        <CardTitle>Products with low stock</CardTitle>
+        <CardDescription>We will run out of stock soon</CardDescription>
+      </CardHeader>
+      <CardContent className="bg-white rounded-b-md">
+      <Error
+        className="h-full"
+        variant="error"
+        description="There was a problem getting stocks data."
+      />
+      </CardContent>
+    </Card>
+    )
+  }
 }
 
 
