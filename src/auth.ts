@@ -15,10 +15,10 @@ export const authOptions = {
       return !!auth
     },
   },
-  // adapter: SupabaseAdapter({
-  //   url: process.env.SUPABASE_URL ?? '',
-  //   secret: process.env.SUPABASE_SERVICE_ROLE_KEY ?? '',
-  // }),
+  adapter: SupabaseAdapter({
+    url: process.env.SUPABASE_URL ?? '',
+    secret: process.env.SUPABASE_SERVICE_ROLE_KEY ?? '',
+  }),
 } satisfies NextAuthConfig;
 
 export const { handlers, signIn, signOut, auth } = NextAuth(authOptions)
