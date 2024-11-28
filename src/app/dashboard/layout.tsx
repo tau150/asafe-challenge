@@ -1,9 +1,11 @@
 "use client";
 
 import { ChartArea, LogOut, TableProperties } from "lucide-react";
+import { useSession, getSession, signOut } from "next-auth/react"
+import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { Routes } from "@/routes";
 import { MenuItem } from "@/components/ui";
 
@@ -12,10 +14,20 @@ export default function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const { data: session } = useSession()
+
+  if(!session){
+    redirect(Routes.ROOT)
+  }
+
   const pathName = usePathname();
 
   return (
-    <main className="flex">
+    <main className="flex relative">
+       <div className="p-4 absolute flex top-0 right-0 justify-center align-center gap-4">
+
+       </div>
       <aside className="flex flex-col p-2 border-l-2 border-2 lg:w-1/12 bg-white lg:min-h-screen">
         <div className="hidden lg:block" >
           <Image alt="logo" height={100} src="/asafe-logo.webp" width={100} />
@@ -49,12 +61,21 @@ export default function DashboardLayout({
             <LogOut className="w-3 h-3" />
           </div>
           <hr />
-          <MenuItem className="hidden lg:mt-6 lg:flex" icon={<LogOut className="w-4 h-4" />}>
+          <MenuItem className="hidden lg:mt-6 lg:flex" onClick={() => signOut()} icon={<LogOut className="w-4 h-4" />}>
             Log out
           </MenuItem>
         </section>
       </aside>
-      <section className="flex-grow">{children}</section>
+      <div className="flex flex-col w-full">
+        <div className="lg:h-18 w-full bg-foreground flex justify-between p-2">
+          <ThemeToggle/>
+          <div className="flex flex-col items-center gap-2">
+            <Image alt="logo" height={30} src={session?.user?.image as string} width={30} className="rounded-full" />
+            <p className="font-semibold text-accent">{session?.user?.name}</p>
+          </div>
+        </div>
+        <section className="flex-grow">{children}</section>
+      </div>
     </main>
   );
 }

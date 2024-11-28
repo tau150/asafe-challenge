@@ -1,9 +1,9 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from 'next/server';
-import { Product, Sale } from '@/domain';
+import { Product } from '@/domain';
 
 const supabase = createClient();
+
 const STOCK_LIMIT = '10';
 
 export async function GET(req: Request) {
