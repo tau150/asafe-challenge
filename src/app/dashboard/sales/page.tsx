@@ -8,6 +8,7 @@ import { useFetch } from '@/hooks/useFetch';
 import { Error } from '@/components/ui';
 
 const PAGINATION_LIMIT = 15
+
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1);
   const { callRequest, data, isLoading, error } = useFetch<{ sales: Sale[]; count: number }>(

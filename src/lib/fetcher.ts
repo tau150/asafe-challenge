@@ -15,14 +15,12 @@ interface RequestOptions {
 const fetcher = async <T>(endpoint: string, options?: RequestOptions): Promise<T> => {
   const url = `${process.env.NEXT_PUBLIC_BASE_URL}${endpoint}`;
 
-  const response = await fetch(
-    url,
-    options && {
-      cache: 'no-store',
-      ...options,
-      ...(options?.body && { body: JSON.stringify(options.body) }),
-    },
-  );
+  const response = await fetch(url, {
+    cache: "no-store",
+    credentials: "include",
+    ...options,
+    ...(options?.body && { body: JSON.stringify(options.body) }),
+  });
 
   if (!response.ok) {
     throw new Error(response.statusText);

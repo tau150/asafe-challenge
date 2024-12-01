@@ -1,13 +1,13 @@
+import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/AuthForm";
 import { auth } from "@/auth";
-import { redirect } from 'next/navigation'
+import { Routes } from "@/routes";
 
 export default async function Home() {
+  const session = await auth();
 
-  const session = await auth()
-
-  if(session) {
-    redirect(`/dashboard`)
+  if (session) {
+    redirect(Routes.DASHBOARD);
   }
 
   return (

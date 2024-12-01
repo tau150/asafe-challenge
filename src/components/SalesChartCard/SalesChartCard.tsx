@@ -1,15 +1,17 @@
-import { SalesChart } from "../SalesChart";
-import { API } from "@/services/dashboardApi"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
 import { Skeleton } from "@/components/ui";
 import { Error } from "@/components/ui";
+import { SalesChart } from "../SalesChart";
+import { API } from "@/services/dashboardApi"
 
 export async function SalesChartCard() {
   try {
     const topSalesProducts = await API.getTopSales();
-
     const graphProps = topSalesProducts.reduce(
-      (acc: { labels: string[]; values: number[] }, current: { name: string; totalSold: number; }) => {
+      (
+        acc: { labels: string[]; values: number[] },
+        current: { name: string; totalSold: number },
+      ) => {
         return {
           ...acc,
           labels: [...acc.labels, current.name],
@@ -20,33 +22,32 @@ export async function SalesChartCard() {
     );
 
     return (
-        <Card className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
-          <CardHeader className="bg-white rounded-t-md">
-            <CardTitle>Top Sales</CardTitle>
-            <CardDescription>In the last one year period</CardDescription>
-          </CardHeader>
-          <CardContent className="bg-white rounded-b-md">
-            <SalesChart data={{ ...graphProps }} />
-          </CardContent>
-        </Card>
+      <Card className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
+        <CardHeader className="bg-white rounded-t-md">
+          <CardTitle>Top Sales</CardTitle>
+          <CardDescription>In the last one year period</CardDescription>
+        </CardHeader>
+        <CardContent className="bg-white rounded-b-md">
+          <SalesChart data={{ ...graphProps }} />
+        </CardContent>
+      </Card>
     );
-
-  }catch(e) {
+  } catch (e) {
     return (
       <Card className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
-      <CardHeader className="bg-white rounded-t-md">
-        <CardTitle>Top Sales</CardTitle>
-        <CardDescription>In the last one year period</CardDescription>
-      </CardHeader>
-      <CardContent className="bg-white rounded-b-md">
-      <Error
-        className="h-full"
-        variant="error"
-        description="There was a problem getting sales data."
-      />
-      </CardContent>
-    </Card>
-    )
+        <CardHeader className="bg-white rounded-t-md">
+          <CardTitle>Top Sales</CardTitle>
+          <CardDescription>In the last one year period</CardDescription>
+        </CardHeader>
+        <CardContent className="bg-white rounded-b-md">
+          <Error
+            className="h-full"
+            description="There was a problem getting sales data."
+            variant="error"
+          />
+        </CardContent>
+      </Card>
+    );
   }
 }
 

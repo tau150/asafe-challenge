@@ -2,7 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { SessionProvider } from "@/components/SessionProvider";
-import { auth } from "@/auth"
+import { auth } from "@/auth";
 import type { Metadata } from "next";
 
 const geistSans = localFont({
@@ -26,16 +26,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
-  const session = await auth()
+  const session = await auth();
 
   return (
     <html suppressHydrationWarning lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-      <SessionProvider session={session}>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
+        <SessionProvider session={session}>
+          <ThemeProvider>{children}</ThemeProvider>
         </SessionProvider>
       </body>
     </html>

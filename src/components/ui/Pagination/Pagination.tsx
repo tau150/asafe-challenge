@@ -1,8 +1,8 @@
-import * as React from "react"
-import { ChevronLeft, ChevronRight, Heading1 } from 'lucide-react'
-import { Button } from "../Button"
-import { cn } from "@/utils/styles"
-import { Skeleton } from "../Skeleton"
+import * as React from "react";
+import { ChevronLeft, ChevronRight, Heading1 } from "lucide-react";
+import { cn } from "@/utils/styles";
+import { Button } from "../Button";
+import { Skeleton } from "../Skeleton";
 
 export interface PaginationProps extends React.HTMLAttributes<HTMLDivElement> {
   currentPage: number;
@@ -22,28 +22,28 @@ export function Pagination({
   ...props
 }: PaginationProps) {
   const getPageNumbers = () => {
-    const pageNumbers = []
-    const halfVisible = Math.floor(maxVisible / 2)
-    let start = Math.max(1, currentPage - halfVisible)
-    let end = Math.min(totalPages, start + maxVisible - 1)
+    const pageNumbers = [];
+    const halfVisible = Math.floor(maxVisible / 2);
+    let start = Math.max(1, currentPage - halfVisible);
+    const end = Math.min(totalPages, start + maxVisible - 1);
 
     if (end - start + 1 < maxVisible) {
-      start = Math.max(1, end - maxVisible + 1)
+      start = Math.max(1, end - maxVisible + 1);
     }
 
     for (let i = start; i <= end; i++) {
-      pageNumbers.push(i)
+      pageNumbers.push(i);
     }
 
-    return pageNumbers
-  }
+    return pageNumbers;
+  };
 
   return (
     <div className={cn("flex items-center justify-center space-x-2", className)} {...props}>
       <Button
+        disabled={currentPage === 1 || isDisabled}
         variant="outline"
         onClick={() => onPageChange(currentPage - 1)}
-        disabled={currentPage === 1 || isDisabled}
       >
         <ChevronLeft className="h-4 w-4" />
         <span className="sr-only">Previous page</span>
@@ -59,15 +59,15 @@ export function Pagination({
         </Button>
       ))}
       <Button
+        disabled={currentPage === totalPages || isDisabled}
         variant="outline"
         onClick={() => onPageChange(currentPage + 1)}
-        disabled={currentPage === totalPages || isDisabled}
       >
         <ChevronRight className="h-4 w-4" />
         <span className="sr-only">Next page</span>
       </Button>
     </div>
-  )
+  );
 }
 
 export function PaginationSkeleton() {
@@ -83,4 +83,3 @@ export function PaginationSkeleton() {
     </div>
   );
 }
-
