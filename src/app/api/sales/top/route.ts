@@ -4,8 +4,8 @@ import { Sale, TopSalesProduct } from "@/domain";
 import { auth } from "@/auth";
 
 export async function GET() {
-  const session = await auth()
-  const supabase = createClient(session?.supabaseAccessToken as string)
+  const session = await auth();
+  const supabase = createClient(session?.supabaseAccessToken as string);
 
   try {
     const { data, error } = await supabase.from("sales").select(`
@@ -40,9 +40,14 @@ export async function GET() {
       .sort((a, b) => b.totalSold - a.totalSold);
 
     return NextResponse.json(topSalesProducts, { status: 200 });
-  } catch (error: any) {
-    console.error("Error in /api/sales/top", error.message);
+  } catch (error: unknown) {
+    let errorMessage = "unknown error ";
 
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      console.error("Error in /api/sales/top", errorMessage);
+    }
+
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }

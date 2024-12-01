@@ -30,7 +30,7 @@ export async function ProductsStockCard() {
         </CardContent>
       </Card>
     );
-  } catch (e) {
+  } catch (_e) {
     return (
       <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
         <CardHeader className="bg-white rounded-t-md">

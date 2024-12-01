@@ -9,6 +9,7 @@ import { Button, Label, Input } from "@/components/ui";
 import { Error } from "@/components/ui";
 
 export function SignUpForm() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [error, setError] = useState<string | null>(null);
 
   const {
@@ -20,17 +21,13 @@ export function SignUpForm() {
     defaultValues: { email: "", password: "", name: "" },
   });
 
-  const onSubmit = async (values: z.infer<typeof signUpSchema>) => {
-      // handle sign up
+  const onSubmit = async (_values: z.infer<typeof signUpSchema>) => {
+    // handle sign up
   };
 
   return (
     <div>
-      {error && <Error
-        className='my-4'
-        variant="error"
-        description={error}
-      />}
+      {error && <Error className="my-4" description={error} variant="error" />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-2 mb-4">
           <Label htmlFor="name">Name</Label>

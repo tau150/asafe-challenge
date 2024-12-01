@@ -32,7 +32,7 @@ export async function SalesChartCard() {
         </CardContent>
       </Card>
     );
-  } catch (e) {
+  } catch (_e) {
     return (
       <Card className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
         <CardHeader className="bg-white rounded-t-md">

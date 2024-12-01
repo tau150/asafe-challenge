@@ -35,7 +35,7 @@ export function useFetch<T>(
     } finally {
       setIsLoading(false);
     }
-  }, [request, onSuccess]);
+  }, [request, onSuccess, onError]);
 
   return { callRequest, data, error, isLoading };
 }

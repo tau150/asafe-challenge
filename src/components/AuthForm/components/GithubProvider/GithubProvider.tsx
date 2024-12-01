@@ -27,7 +27,7 @@ export function GithubProvider() {
       </CardContent>
       <CardFooter className="flex justify-center mb-0 pb-0">
         <p className="text-sm text-muted-foreground">
-          Don't have a GitHub account?{" "}
+          Do not have a GitHub account?{" "}
           <a
             className="text-primary hover:underline"
             href="https://github.com/join"
