@@ -2,7 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import {
   Button,
-  Card,
+  CustomCard,
   CardContent,
   CardHeader,
   CardTitle,
@@ -38,7 +38,7 @@ export default function Dashboard() {
   if (error) {
     return (
       <div className="h-full flex justify-center items-center">
-        <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
+        <CustomCard className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
           <CardHeader className="bg-white rounded-t-md">
             <CardTitle className="text-center">Something went wrong</CardTitle>
           </CardHeader>
@@ -52,7 +52,7 @@ export default function Dashboard() {
               Try again
             </Button>
           </CardContent>
-        </Card>
+        </CustomCard>
       </div>
     );
   }

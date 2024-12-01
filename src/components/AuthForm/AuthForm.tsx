@@ -1,11 +1,11 @@
 "use client";
 
-import { Title, Card, CardContent, CardDescription, CardHeader } from "@/components/ui";
+import { Title, CustomCard, CardContent, CardDescription, CardHeader } from "@/components/ui";
 import { GithubProvider } from "./components/GithubProvider";
 
 export function AuthForm() {
   return (
-    <Card className="w-full max-w-md mx-auto">
+    <CustomCard className="w-full max-w-md mx-auto">
       <CardHeader>
         <Title className="text-center">Welcome</Title>
         <CardDescription className="text-center">Sign in to your account</CardDescription>
@@ -15,6 +15,6 @@ export function AuthForm() {
           <GithubProvider />
         </div>
       </CardContent>
-    </Card>
+    </CustomCard>
   );
 }

@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
+import { CustomCard, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
 import { Skeleton } from "@/components/ui";
 import { Error } from "@/components/ui";
 import { API } from "@/services/dashboardApi";
@@ -22,7 +22,7 @@ export async function SalesChartCard() {
     );
 
     return (
-      <Card className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
+      <CustomCard className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
         <CardHeader className="bg-white rounded-t-md">
           <CardTitle>Top Sales</CardTitle>
           <CardDescription>In the last one year period</CardDescription>
@@ -30,11 +30,11 @@ export async function SalesChartCard() {
         <CardContent className="bg-white rounded-b-md">
           <SalesChart data={{ ...graphProps }} />
         </CardContent>
-      </Card>
+      </CustomCard>
     );
   } catch (_e) {
     return (
-      <Card className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
+      <CustomCard className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4">
         <CardHeader className="bg-white rounded-t-md">
           <CardTitle>Top Sales</CardTitle>
           <CardDescription>In the last one year period</CardDescription>
@@ -46,14 +46,14 @@ export async function SalesChartCard() {
             variant="error"
           />
         </CardContent>
-      </Card>
+      </CustomCard>
     );
   }
 }
 
 export function SalesChartCardSkeleton() {
   return (
-    <Card className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4 h-[300px] lg:h-[560px]">
+    <CustomCard className="w-full lg:w-[60%] mt-4 bg-slate-50 p-4 h-[300px] lg:h-[560px]">
       <CardHeader className="bg-white rounded-t-md pb-2">
         <Skeleton className="h-6 w-1/6" />
         <Skeleton className="h-6 w-2/6" />
@@ -108,6 +108,6 @@ export function SalesChartCardSkeleton() {
           <Skeleton className="h-6 w-5/6" />
         </div>
       </CardContent>
-    </Card>
+    </CustomCard>
   );
 }

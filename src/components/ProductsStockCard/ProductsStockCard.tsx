@@ -1,5 +1,5 @@
 import { API } from "@/services/dashboardApi";
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
+import { CustomCard, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
 import { Skeleton } from "@/components/ui";
 import { Title } from "@/components/ui";
 import { Error } from "@/components/ui";
@@ -10,7 +10,7 @@ export async function ProductsStockCard() {
     const lowStockProductsName = lowStockProducts.map((product) => product.name);
 
     return (
-      <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
+      <CustomCard className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
         <CardHeader className="bg-white rounded-t-md">
           <CardTitle>Products with low stock</CardTitle>
           <CardDescription>We will run out of stock soon</CardDescription>
@@ -28,11 +28,11 @@ export async function ProductsStockCard() {
             ))}
           </div>
         </CardContent>
-      </Card>
+      </CustomCard>
     );
   } catch (_e) {
     return (
-      <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
+      <CustomCard className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4">
         <CardHeader className="bg-white rounded-t-md">
           <CardTitle>Products with low stock</CardTitle>
           <CardDescription>We will run out of stock soon</CardDescription>
@@ -44,14 +44,14 @@ export async function ProductsStockCard() {
             variant="error"
           />
         </CardContent>
-      </Card>
+      </CustomCard>
     );
   }
 }
 
 export function ProductsStockCardSkeleton() {
   return (
-    <Card className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4 h-[300px] lg:h-[560px]">
+    <CustomCard className="w-full lg:max-w-[40%] mt-4 flex flex-col bg-slate-50 p-4 h-[300px] lg:h-[560px]">
       <CardHeader className="bg-white rounded-t-md pb-2">
         <Skeleton className="h-6 w-2/6" />
         <Skeleton className="h-6 w-1/6" />
@@ -65,6 +65,6 @@ export function ProductsStockCardSkeleton() {
           <Skeleton className="h-6 w-4/6" />
         </div>
       </CardContent>
-    </Card>
+    </CustomCard>
   );
 }
