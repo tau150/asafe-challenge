@@ -11,9 +11,9 @@ export default middleware((req) => {
   if (!isAuthenticated && !isPublicRoute) {
     return Response.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}${Routes.ROOT}`);
   }
+
   return NextResponse.next();
 });
-
 
 export const config = {
   matcher: ["/((?!api/auth|_next/static|_next/image|favicon.ico).*)"],

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 
 type UseFetchResult<T> = {
   data: T | null;
@@ -10,7 +10,7 @@ type UseFetchResult<T> = {
 export function useFetch<T>(
   request: () => Promise<T>,
   onSuccess?: () => void,
-  onError?: () => void
+  onError?: () => void,
 ): UseFetchResult<T> {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -22,20 +22,20 @@ export function useFetch<T>(
 
     try {
       const response = await request();
+
       setData(response);
-      onSuccess?.()
+      onSuccess?.();
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);
       } else {
         setError("An unexpected error occurred");
       }
-      onError?.()
+      onError?.();
     } finally {
       setIsLoading(false);
     }
   }, [request, onSuccess]);
 
   return { callRequest, data, error, isLoading };
-
 }

@@ -4,4 +4,4 @@ export enum Routes {
   "SALES" = "/dashboard/sales",
 }
 
-export const PUBLIC_ROUTES: string[] = [Routes.ROOT]
+export const PUBLIC_ROUTES: string[] = [Routes.ROOT];

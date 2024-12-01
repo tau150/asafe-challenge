@@ -1,8 +1,8 @@
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui";
 import { Skeleton } from "@/components/ui";
 import { Error } from "@/components/ui";
+import { API } from "@/services/dashboardApi";
 import { SalesChart } from "../SalesChart";
-import { API } from "@/services/dashboardApi"
 
 export async function SalesChartCard() {
   try {

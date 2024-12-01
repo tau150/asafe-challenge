@@ -1,10 +1,8 @@
-
-'use client'
+"use client";
 import { Skeleton } from "@/components/ui";
 import { Sale } from "@/domain";
 
-export function SalesTable({data}: {data: Sale[]}) {
-
+export function SalesTable({ data }: { data: Sale[] }) {
   return (
     <div className="w-full flex justify-center">
       <div className="w-4/5 overflow-x-auto mt-12">
@@ -35,24 +33,24 @@ export function SalesTableSkeleton() {
   return (
     <div className="w-full flex justify-center">
       <div className="w-4/5 overflow-x-auto mt-12">
-       <div className="flex flex-col gap-2">
-        <Skeleton className="h-12" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-        <Skeleton className="h-8" />
-       </div>
+        <div className="flex flex-col gap-2">
+          <Skeleton className="h-12" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+          <Skeleton className="h-8" />
+        </div>
       </div>
     </div>
   );

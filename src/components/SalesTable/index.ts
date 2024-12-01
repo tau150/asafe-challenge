@@ -1,2 +1,1 @@
-export * from './SalesTable'
-
+export * from "./SalesTable";

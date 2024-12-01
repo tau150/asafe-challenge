@@ -1,1 +1,1 @@
-export * from "./ProductsStockCard"
+export * from "./ProductsStockCard";

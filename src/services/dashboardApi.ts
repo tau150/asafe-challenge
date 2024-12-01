@@ -1,13 +1,13 @@
 import { createClient } from "@/utils/supabase/server";
-import type { TopSalesProduct, Product, Sale } from "@/domain";
 import { auth } from "@/auth";
+import type { TopSalesProduct, Product, Sale } from "@/domain";
 
 const STOCK_LIMIT = 10;
-async function getLowStockProducts(): Promise<Product[]> {
 
+async function getLowStockProducts(): Promise<Product[]> {
   try {
-    const session = await auth()
-    const supabase = createClient(session?.supabaseAccessToken as string)
+    const session = await auth();
+    const supabase = createClient(session?.supabaseAccessToken as string);
 
     const { data, error } = await supabase.from("products").select("*").lte("stock", STOCK_LIMIT);
 
@@ -19,8 +19,7 @@ async function getLowStockProducts(): Promise<Product[]> {
     }
 
     return Promise.resolve(data || []);
-
-  } catch (error: any) {
+  } catch (error: unknown) {
     throw error;
   }
   // Originally the idea was to call the api to take care of these tasks, but for some reasons it was impossible to get session server side in api routes
@@ -28,8 +27,8 @@ async function getLowStockProducts(): Promise<Product[]> {
 }
 
 async function getTopSales(): Promise<TopSalesProduct[]> {
-  const session = await auth()
-  const supabase = createClient(session?.supabaseAccessToken as string)
+  const session = await auth();
+  const supabase = createClient(session?.supabaseAccessToken as string);
 
   try {
     const { data, error } = await supabase.from("sales").select(`
